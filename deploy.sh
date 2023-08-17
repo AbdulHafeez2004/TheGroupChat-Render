@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-gunicorn chat.asgi:application -k uvicorn.workers.UvicornWorker
+gunicorn chatapp.asgi:application -k uvicorn.workers.UvicornWorker
