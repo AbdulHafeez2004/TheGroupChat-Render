@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        body {
+            margin: 0 auto;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        h2 {
+            font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+                "Lucida Sans", Arial, sans-serif;
+            font-size: 2em;
+            text-align: center;
+            font-weight: 800;
+            color: black;
+        }
+
+        .container {
+            /* border: 2px solid #dedede; */
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .darker {
+            border-color: white;
+            background: linear-gradient(to right, #000428, #004e92 70%);
+            background-color: #333;
+            font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+                "Lucida Sans", Arial, sans-serif;
+            color: white;
+            width: 40%;
+            box-shadow: 0 0 20px blue, 0 0 60px blue;
+        }
+
+        .container::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .container img {
+            float: left;
+            max-width: 60px;
+            width: 100%;
+            margin-right: 20px;
+            border-radius: 50%;
+        }
+
+        .container img.right {
+            float: right;
+            margin-left: 20px;
+            margin-right: 0;
+        }
+
+        .time-right {
+            font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+                "Lucida Sans", Arial, sans-serif;
+            float: right;
+            color: #aaa;
+        }
+
+        .time-left {
+            font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+                "Lucida Sans", Arial, sans-serif;
+            float: left;
+            color: #999;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    {% load static %}
+</head>
+
+<body>
+    <div class="image">
+        <img src="{% static 'group-of-people-in-a-formation-23.png' %}" alt="Logo" />
+    </div>
+    <h2>{{room}}</h2>
+
+    <div id="display"></div>
+
+    <script>
+      $(document).ready(function () {
+        setInterval(function () {
+          $.ajax({
+            type: "GET",
+            url: "/getMessages/{{room}}/",
+            success: function (response) {
+              console.log(response);
+              $("#display").empty();
+              for (var key in response.messages) {
+                var temp =
+                  "<div class='container darker'><b>" +
+                  response.messages[key].user +
+                  "</b><p>" +
+                  response.messages[key].value +
+                  "</p><span class='time-left'>" +
+                  response.messages[key].date +
+                  "</span></div>";
+                $("#display").append(temp);
+              }
+            },
+            error: function (response) {
+              alert("An error occured");
+            },
+          });
+        }, 1000);
+      });
+    </script>
+
+    <div class="container">
+        <style>
+            input[type="text"],
+            select {
+                width: 90%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                background: white;
+                color: black;
+                margin-left: 10px;
+            }
+
+            div {
+                border-radius: 5px;
+                background-color: #eee;
+                padding: 20px;
+            }
+
+            form {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+            }
+
+            /* form button img {
+          margin: 5px;
+          height: fit-content;
+
+        } */
+            .pencil {
+                margin-right: 45px;
+                background: white;
+                border: none;
+
+            }
+
+            #submit {
+                border: none;
+            }
+
+            form button {
+                color: white;
+                background-color: white;
+            }
+
+            /* form button {
+          color: white;
+          background-color: green;
+          border-radius: 4px;
+          border: 2px solid white;
+          height: 35px;
+          border: none;
+        } */
+            form button:hover {
+                -webkit-animation-name: fa-beat;
+                animation-name: fa-beat;
+                -webkit-animation-delay: var(--fa-animation-delay, 0);
+                animation-delay: var(--fa-animation-delay, 0);
+                -webkit-animation-direction: var(--fa-animation-direction, normal);
+                animation-direction: var(--fa-animation-direction, normal);
+                -webkit-animation-duration: var(--fa-animation-duration, 1s);
+                animation-duration: var(--fa-animation-duration, 1s);
+                -webkit-animation-iteration-count: var(--fa-animation-iteration-count,
+                        infinite);
+                animation-iteration-count: var(--fa-animation-iteration-count,
+                        infinite);
+                -webkit-animation-timing-function: var(--fa-animation-timing,
+                        ease-in-out);
+                animation-timing-function: var(--fa-animation-timing, ease-in-out);
+            }
+
+            form img:hover {
+                -webkit-animation-name: fa-beat;
+                animation-name: fa-beat;
+                -webkit-animation-delay: var(--fa-animation-delay, 0);
+                animation-delay: var(--fa-animation-delay, 0);
+                -webkit-animation-direction: var(--fa-animation-direction, normal);
+                animation-direction: var(--fa-animation-direction, normal);
+                -webkit-animation-duration: var(--fa-animation-duration, 1s);
+                animation-duration: var(--fa-animation-duration, 1s);
+                -webkit-animation-iteration-count: var(--fa-animation-iteration-count,
+                        infinite);
+                animation-iteration-count: var(--fa-animation-iteration-count,
+                        infinite);
+                -webkit-animation-timing-function: var(--fa-animation-timing,
+                        ease-in-out);
+                animation-timing-function: var(--fa-animation-timing, ease-in-out);
+            }
+
+            .image {
+                height: 100px;
+                width: 95%;
+                background-color: #fff;
+                display: flex;
+                justify-content: center;
+                margin-top: 10%;
+                margin-bottom: 5%;
+            }
+        </style>
+
+        <form id="post-form">
+            {% csrf_token %}
+            <input type="hidden" name="username" id="username" value="{{username}}" />
+            <input type="hidden" name="room_id" id="room_id" value="{{room_details.id}}" />
+            <input type="text" name="message" id="message" width="100px" />
+            <button type="submit" id="submit">
+                <img src="{% static 'pencil.png' %}" alt="" class="pencil">
+            </button>
+        </form>
+    </div>
+</body>
+
+<script type="text/javascript">
+    $(document).on("submit", "#post-form", function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: "POST",
+            url: "/send",
+            data: {
+                username: $("#username").val(),
+                room_id: $("#room_id").val(),
+                message: $("#message").val(),
+                csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+            },
+            success: function (data) {
+                //alert(data)
+            },
+        });
+        document.getElementById("message").value = "";
+    });
+    let input = document.getElementById("message").value;
+    let btn = document.getElementById("submit");
+    if (input == "") {
+        alert("You must write before you send a message.");
+        return false;
+    }
+</script>
+
+</html>

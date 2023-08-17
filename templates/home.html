@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    {% load static %}
+
+<body>
+    <style>
+        * {
+            font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+                sans-serif;
+            font-size: 1em;
+        }
+
+        body {
+            box-sizing: border-box;
+            background-color: #333;
+        }
+
+        form h2 {
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            padding: 20px;
+            border-radius: 10px;
+            margin-left: 50px;
+            width: 80%;
+        }
+
+        input {
+            height: 30px;
+            width: 70%;
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            margin-left: 100px;
+            border: 2px solid white;
+            border-radius: 5px;
+            margin-bottom: 40px;
+        }
+
+        #submit-btn {
+            -webkit-animation-name: fa-bounce;
+            animation-name: fa-bounce;
+            -webkit-animation-delay: var(--fa-animation-delay, 0);
+            animation-delay: var(--fa-animation-delay, 0);
+            -webkit-animation-direction: var(--fa-animation-direction, normal);
+            animation-direction: var(--fa-animation-direction, normal);
+            -webkit-animation-duration: var(--fa-animation-duration, 1s);
+            animation-duration: var(--fa-animation-duration, 1s);
+            -webkit-animation-iteration-count: var(--fa-animation-iteration-count,
+                    infinite);
+            animation-iteration-count: var(--fa-animation-iteration-count,
+                    infinite);
+            -webkit-animation-timing-function: var(--fa-animation-timing,
+                    cubic-bezier(0.28, 0.84, 0.42, 1));
+            animation-timing-function: var(--fa-animation-timing,
+                    cubic-bezier(0.28, 0.84, 0.42, 1));
+        }
+
+        h1 {
+            font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+                "Lucida Sans", Arial, sans-serif;
+            font-size: 2em;
+            text-align: center;
+            font-weight: 800;
+            color: rgb(0, 60, 255);
+            margin-bottom: 50px;
+        }
+
+        #submit-btn {
+            margin-left: 200px;
+            height: 50px;
+            width: 300px;
+            background-color: rgb(0, 174, 255);
+            border: 0;
+            border-radius: 5px;
+            transition: 250ms ease-in-out;
+        }
+
+        #submit-btn:hover {
+            background-color: none;
+            color: aliceblue;
+            transform: translateY(-5px);
+        }
+
+        .image {
+            height: 100px;
+            width: 100%;
+            color: rgb(0, 60, 255);
+            display: flex;
+            justify-content: center;
+        }
+
+        @media (max-width: 900px) {
+            input {
+                height: 30px;
+                width: 70%;
+                display: block;
+                margin-top: 10px;
+                margin-bottom: 15px;
+                margin-left: 30px;
+                border: 2px solid white;
+                border-radius: 5px;
+            }
+
+            form h2 {
+                margin-right: 70px;
+                color: white;
+            }
+
+            #submit-btn {
+                margin-left: 27%;
+                height: 30px;
+                width: 30%;
+                background-color: rgb(0, 174, 255);
+                border: 0;
+                border-radius: 5px;
+                transition: 250ms ease-in-out;
+            }
+        }
+
+        @media (min-width: 1800px) {
+            input {
+                height: 50px;
+                width: 100%;
+                display: block;
+                margin-top: 10px;
+                margin-bottom: 15px;
+                margin-left: 110px;
+                border: 2px solid white;
+                border-radius: 5px;
+                margin-bottom: 40px;
+            }
+
+            form h2 {
+                text-align: center;
+                color: white;
+            }
+
+            h1 {
+                font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+                    "Lucida Sans", Arial, sans-serif;
+                font-size: 2em;
+                margin-left: -140px;
+                font-weight: 800;
+                color: rgb(0, 60, 255);
+                margin-bottom: 50px;
+            }
+
+            #submit-btn {
+                margin-left: 35%;
+                height: 50px;
+                width: 30%;
+                background-color: rgb(0, 174, 255);
+                border: 0;
+                border-radius: 5px;
+                transition: 250ms ease-in-out;
+            }
+
+            .image {
+                height: 100px;
+                width: 80%;
+                margin-left: 100px;
+                display: flex;
+                justify-content: center;
+                margin-top: 70px;
+                margin-bottom: 90px;
+            }
+        }
+    </style>
+    <div class="image">
+        <img src="{% static 'group-of-people-in-a-formation-23.png' %}" alt="Logo" />
+    </div>
+    <h1>The Group Chat</h1>
+    <form action="checkview" method="post">
+        {% csrf_token %}
+        <h2>Group Name</h2>
+        <input placeholder="Enter your group name." name="room-name" type="text" required />
+        <h2>Username</h2>
+        <input placeholder="Enter your username." name="username" type="text" required />
+        <button type="submit" id="submit-btn">
+            <i class="fa-bounce">Submit</i>
+        </button>
+    </form>
+</body>
+
+</html>
